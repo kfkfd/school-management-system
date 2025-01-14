@@ -1,16 +1,41 @@
 #include "stulibsystem.h"
 #define _CRT_SECURE_NO_WARNINGS
 
+//Get the password, don't show it
+
+static char* getpassword(void) {
+	char password[20];
+	int i = 0;
+	while (1) {
+		password[i] = _getch();  // 读取一个字符，不回显到控制台
+		if (password[i] == '\r' || password[i] == '\n') {  // 按下回车键结束输入
+			password[i] = '\0';
+			break;
+		}
+		else if (password[i] == '\b') {  // 按下退格键
+			if (i > 0) {
+				i--;
+				printf("\b \b");  // 删除最后一个星号
+			}
+		}
+		else {
+			printf("*");  // 显示星号
+			i++;
+		}
+	}
+	return password;
+}
+
  static bool LoginRoot(int* count)
 {
 	printf("Please enter the administrator account->");
-	char a[20] = { 0 }, p[20] = {0};
+	char a[20] = { 0 };
 	scanf(" %s", &a);
 	printf("Please enter the administrator password->_____\b\b\b\b\b");
-	scanf(" %s", &p);
+	char* p = getpassword();
 	if (strcmp("administr", a) == 0 && strcmp("12345", p) == 0)
 	{
-		printf("ROOT::Login Successful!\n");
+		printf("\nROOT::Login Successful!\n");
 		return true;
 	}
 	else
@@ -22,17 +47,17 @@
 }
  static bool LoginTec(Teacher* ps,int* count,int* num)
  {
-	 printf("请输入工号");
-	 char id[20] = { 0 }, passward[20] = {0};
+	 printf("请输入工号->");
+	 char id[20] = { 0 };
 	 scanf("%s", &id);
-	 printf("请输入密码");
-	 scanf("%s", &passward);
+	 printf("请输入密码->");
+	 char* password = getpassword();
 	 int ret = FindTecByid(ps,id); 
 	 if (ret != -1)
 	 {
-		 if (strcmp(ps->data[ret].passward, passward) == 0)
+		 if (strcmp(ps->data[ret].passward, password) == 0)
 		 {
-			 printf("%s : Login Successful!\n",ps->data[ret].name);
+			 printf("\n%s : Login Successful!\n",ps->data[ret].name);
 			 (*num) = ret;
 			 return true;
 		 }
