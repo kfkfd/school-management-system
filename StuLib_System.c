@@ -7,19 +7,19 @@ static char* getpassword(void) {
 	char password[20];
 	int i = 0;
 	while (1) {
-		password[i] = _getch();  // ¶ÁÈ¡Ò»¸ö×Ö·û£¬²»»ØÏÔµ½¿ØÖÆÌ¨
-		if (password[i] == '\r' || password[i] == '\n') {  // °´ÏÂ»Ø³µ¼ü½áÊøÊäÈë
+		password[i] = _getch();  
+		if (password[i] == '\r' || password[i] == '\n') {  
 			password[i] = '\0';
 			break;
 		}
-		else if (password[i] == '\b') {  // °´ÏÂÍË¸ñ¼ü
+		else if (password[i] == '\b') {  
 			if (i > 0) {
 				i--;
-				printf("\b \b");  // É¾³ı×îºóÒ»¸öĞÇºÅ
+				printf("\b \b");  
 			}
 		}
 		else {
-			printf("*");  // ÏÔÊ¾ĞÇºÅ
+			printf("*"); 
 			i++;
 		}
 	}
@@ -47,10 +47,10 @@ static char* getpassword(void) {
 }
  static bool LoginTec(Teacher* ps,int* count,int* num)
  {
-	 printf("ÇëÊäÈë¹¤ºÅ->");
+	 printf("è¯·è¾“å…¥å·¥å·->");
 	 char id[20] = { 0 };
 	 scanf("%s", &id);
-	 printf("ÇëÊäÈëÃÜÂë->");
+	 printf("è¯·è¾“å…¥å¯†ç ->");
 	 char* password = getpassword();
 	 int ret = FindTecByid(ps,id); 
 	 if (ret != -1)
@@ -63,32 +63,32 @@ static char* getpassword(void) {
 		 }
 		 else
 		 {
-			 (*count)++; //´íÎóµş¼Ó
+			 (*count)++; //é”™è¯¯å åŠ 
 			 return false;
 		 }
 	 }
 	 else
 	 {
 		 (*count)++;
-		 printf("ÕÒ²»µ½¸ÃÓÃ»§\n");
+		 printf("æ‰¾ä¸åˆ°è¯¥ç”¨æˆ·\n");
 		 return false;
 	 }
  }
  static int LoginStu(Student* stu,int* num)
  {
-	 printf("ÇëÊäÈëÑ§ºÅ->");
+	 printf("è¯·è¾“å…¥å­¦å·->");
 	 char id[20] = { 0 };
 	 scanf("%s", &id);
 	 int ret = FindByid(stu, id);
 	 if (ret == -1)
 	 {
-		 printf("ÇëÊäÈëÕıÈ·µÄÑ§ºÅ\n");
+		 printf("è¯·è¾“å…¥æ­£ç¡®çš„å­¦å·\n");
 		 return 0;
 	 }
 	 else
 	 {
 		 (*num) = ret;
-		 printf("%s Í¬Ñ§:Login Successful!\n", stu->data[ret].name);
+		 printf("%s åŒå­¦:Login Successful!\n", stu->data[ret].name);
 		 return 1;
 	 }
  }
@@ -114,7 +114,7 @@ static char* getpassword(void) {
 			 break;
 		 case 0:
 			 printf("EXIT\n");
-			 printf("**¸ĞĞ»Ê¹ÓÃ**");
+			 printf("**æ„Ÿè°¢ä½¿ç”¨**");
 			 break;
 		 default:
 			 printf("Please choose true num!\n");
@@ -128,9 +128,9 @@ static char* getpassword(void) {
 	 int cho = 0;
 	 do {
 		 printf("+--------------+\n");
-		 printf("|  1.ĞŞ¸ÄÃÜÂë  |\n|2.Ñ§ÉúĞÅÏ¢²Ù×÷|\n|    0.ÍË³ö    |\n");
+		 printf("|  1.ä¿®æ”¹å¯†ç   |\n|2.å­¦ç”Ÿä¿¡æ¯æ“ä½œ|\n|    0.é€€å‡º    |\n");
 		 printf("+--------------+\n");
-		 printf("ÇëÑ¡Ôñ->");
+		 printf("è¯·é€‰æ‹©->");
 		 scanf("%d", &cho);
 		 switch (cho)
 		 {
@@ -152,9 +152,9 @@ static char* getpassword(void) {
 	 do
 	 {
 		 printf("+--------------+\n");
-		 printf("|1.²éÕÒÍ¼ÊéĞÅÏ¢|\n|    2.½èÊé    |\n|    3.»¹Êé    |\n|    0.ÍË³ö    |\n");
+		 printf("|1.æŸ¥æ‰¾å›¾ä¹¦ä¿¡æ¯|\n|    2.å€Ÿä¹¦    |\n|    3.è¿˜ä¹¦    |\n|    0.é€€å‡º    |\n");
 		 printf("+--------------+\n");
-		 printf("ÇëÑ¡Ôñ->");
+		 printf("è¯·é€‰æ‹©->");
 		 scanf("%d", &cho);
 		 switch (cho)
 		 {
@@ -170,7 +170,7 @@ static char* getpassword(void) {
 		 case 0:
 			 break;
 		 default:
-			 printf("ÇëÊäÈëÕıÈ·µÄÑ¡Ïî");
+			 printf("è¯·è¾“å…¥æ­£ç¡®çš„é€‰é¡¹");
 		 }
 	 } while (cho);
 	 SaveBokinfo(lib);
@@ -238,8 +238,8 @@ int Login(Teacher* tec, Student* stu,int* num)
 int main()
 {
 	printf("Welcome to the School Library Integrated Management System\n");
-	//»¶Ó­Ê¹ÓÃÑ§Ğ£Í¼Êé¹İ×ÛºÏ¹ÜÀíÏµÍ³
-	//³õÊ¼»¯¸÷¸ö½á¹¹Ìå
+	//æ¬¢è¿ä½¿ç”¨å­¦æ ¡å›¾ä¹¦é¦†ç»¼åˆç®¡ç†ç³»ç»Ÿ
+	//åˆå§‹åŒ–å„ä¸ªç»“æ„ä½“
 	Library lib;
 	InitLibrary(&lib);
 	Student stu;
