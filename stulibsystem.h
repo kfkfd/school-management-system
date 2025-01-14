@@ -16,7 +16,7 @@
 #include <time.h>
 #include <windows.h>
 #include <stdbool.h>
-
+#include <conio.h>
 
 
 #define DEFAULT_NUM 3
